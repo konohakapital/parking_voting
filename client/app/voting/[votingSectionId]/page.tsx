@@ -1,53 +1,47 @@
-// /app/voting/[votingSectionId]/page.tsx
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/router"
-import CommentsSection from "../../components/CommentsSection"
-import VotingSection from "../../components/VotingSection"
+import { useState } from "react";
+import { useParams } from "next/navigation";
+import CommentsSection from "../../components/CommentsSection";
+import VotingSection from "../../components/VotingSection";
 
 const VotingPage = () => {
-  const router = useRouter()
-  const { votingSectionId } = router.query // Get the voting section ID from the URL
+  const { votingSectionId } = useParams(); 
 
-  const [comments, setComments] = useState<{ user: string, text: string, time: string }[]>([])
+  const [comments, setComments] = useState<{ user: string; text: string; time: string }[]>([]);
 
-  const addComment = (comment: { user: string, text: string, time: string }) => {
-    setComments((prevComments) => [...prevComments, comment])
-  }
+  const addComment = (comment: { user: string; text: string; time: string }) => {
+    setComments((prevComments) => [...prevComments, comment]);
+  };
 
-  const votingSections = {
+  type VotingSectionType = "radio" | "slider" | "toggle" | "checkbox";
+
+  const votingSections: { [key: string]: { title: string; description: string; options: string[]; type: VotingSectionType } } = {
     "truck-parking": {
       title: "Truck Parking & Circulation",
       description: "Vote on the number of truck parking spaces and their layout.",
       options: ["100 Parallel Spaces", "150 Angled Spaces", "200 Mixed Layout"],
-      type: "radio"
+      type: "radio",
     },
     "fueling-stations": {
       title: "Fueling Stations",
       description: "Choose the types of fueling stations to include.",
       options: ["Diesel Only", "Diesel & Electric", "Diesel, Electric & Natural Gas"],
-      type: "radio"
-    }
-    // Add more sections as needed
-  }
+      type: "radio",
+    },
+  };
 
-  const section = votingSections[votingSectionId as keyof typeof votingSections]
+  const section = votingSections[votingSectionId as keyof typeof votingSections];
 
   if (!section) {
-    return <p>Voting section not found.</p>
+    return <p>Voting section not found.</p>;
   }
 
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Join the Discussion: {section.title}</h1>
-        <VotingSection
-          title={section.title}
-          description={section.description}
-          options={section.options}
-          type={section.type}
-        />
+        <VotingSection title={section.title} description={section.description} options={section.options} type={section.type} />
 
         <CommentsSection title={section.title} comments={comments} onAddComment={addComment} />
 
@@ -56,8 +50,7 @@ const VotingPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VotingPage
-
+export default VotingPage;
