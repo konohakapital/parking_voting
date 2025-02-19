@@ -14,7 +14,7 @@ import {
 export function NavHeader() {
   return (
     <header className="flex h-16 items-center justify-between border-b px-6">
-      <Link href="/dashboard" className="flex items-center space-x-2">
+      <Link href="/" className="flex items-center space-x-2">
         <MapPin className="h-6 w-6" />
         <span className="text-lg font-bold">TruckParking.live</span>
       </Link>
