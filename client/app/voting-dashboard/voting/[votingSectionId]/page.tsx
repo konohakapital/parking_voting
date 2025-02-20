@@ -18,7 +18,7 @@ const VotingPage = () => {
 
   const votingSections: { [key: string]: { title: string; description: string; options: string[]; type: VotingSectionType } } = {
     "truck-parking": {
-      title: "Truck Parking & Circulation",
+      title: "Truck Parking",
       description: "Vote on the number of truck parking spaces and their layout.",
       options: ["100 Parallel Spaces", "150 Angled Spaces", "200 Mixed Layout"],
       type: "radio",

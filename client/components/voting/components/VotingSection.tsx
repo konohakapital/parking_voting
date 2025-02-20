@@ -1,9 +1,10 @@
+/* app/components/VotingSection.tsx */
 "use client"
 
 import Link from "next/link"
 import { useState } from "react"
 import { ChevronUp, ChevronDown } from "lucide-react"
-import CommentsSection from "./CommentsSection"
+import CommentsSection from "@/components/CommentSection"
 
 interface VotingSectionProps {
   title: string

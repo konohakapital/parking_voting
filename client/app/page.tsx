@@ -36,7 +36,7 @@ export default function LandingPage() {
               </div>
               <div className="space-x-4">
                 <Button asChild>
-                  <Link href="/login">Get Started</Link>
+                  <Link href="/signup">Get Started</Link>
                 </Button>
                 <Button variant="outline" asChild>
                   <Link href="#how-it-works">Learn More</Link>

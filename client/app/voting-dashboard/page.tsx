@@ -1,4 +1,4 @@
-import VotingPage from "@/components/VotingPage"
+import VotingPage from "@/components/voting/VotingPage"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/lib/auth"
 

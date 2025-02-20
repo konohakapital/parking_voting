@@ -1,3 +1,4 @@
+/* client/components/CommentSection.tsx */
 "use client"
 
 import { useState, useEffect } from "react"
@@ -13,20 +14,25 @@ interface Comment {
 interface CommentSectionProps {
   session: Session | null
   optionId: number
+  title?: string
 }
 
-export default function CommentSection({ session, optionId }: CommentSectionProps) {
+export default function CommentSection({ session, optionId, title }: CommentSectionProps) {
   const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState("")
 
   useEffect(() => {
     fetchComments()
-  }, [])
+  }, [optionId])
 
   const fetchComments = async () => {
-    const response = await fetch(`/api/comment?optionId=${optionId}`)
-    const data = await response.json()
-    setComments(data)
+    try {
+      const response = await fetch(`/api/comment?optionId=${optionId}`)
+      const data = await response.json()
+      setComments(data)
+    } catch (error) {
+      console.error("Error fetching comments:", error)
+    }
   }
 
   const handleSubmitComment = async (e: React.FormEvent) => {
@@ -35,17 +41,28 @@ export default function CommentSection({ session, optionId }: CommentSectionProp
       alert("Please log in to comment")
       return
     }
-    await fetch("/api/comment", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ optionId, text: newComment }),
-    })
-    setNewComment("")
-    await fetchComments()
+    try {    
+      if (!newComment.trim()) {
+        alert("Comment cannot be empty")
+        return
+      }  
+      await fetch("/api/comment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ optionId, text: newComment }),
+      })
+      setNewComment("")
+      await fetchComments()
+    } catch (error) {
+      console.error("Error submitting comment:", error)
+    }
   }
 
   return (
-    <div>
+    <div className="bg-white rounded-lg shadow-md p-6 my-4">
+      {title && <h3 className="text-xl font-semibold mb-4">{title} - Comments</h3>}
+
+      {/* If user is logged in, show a comment form; otherwise a login prompt */}
       {session ? (
         <form onSubmit={handleSubmitComment} className="mb-4">
           <textarea
@@ -61,6 +78,7 @@ export default function CommentSection({ session, optionId }: CommentSectionProp
       ) : (
         <p className="mb-4 text-red-500">Please log in to comment and view discussions.</p>
       )}
+      {/* Display comments */}
       <div className="space-y-4">
         {comments.map((comment) => (
           <div key={comment.id} className="bg-gray-100 p-4 rounded">

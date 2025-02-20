@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
-import { NavHeader } from "@/components/dashboard/nav-header"
-import { SidebarNav } from "@/components/dashboard/sidebar-nav"
+import { NavHeader } from "@/components/parking-booking/dashboard/nav-header"
+import { SidebarNav } from "@/components/parking-booking/dashboard/sidebar-nav"
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 
 // This is a placeholder for actual auth check

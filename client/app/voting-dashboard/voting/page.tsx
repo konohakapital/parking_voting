@@ -1,22 +1,29 @@
 "use client";
 
-import Header from "../components/Header"
-import Introduction from "../components/Introduction"
 import VotingSection from "../components/VotingSection"
 import ProgressBar from "../components/ProgressBar"
-import Leaderboard from "../components/Leaderboard"
+import Leaderboard from "../../../components/voting/components/voting/Leaderboard"
 import EmailSignUp from "../components/EmailSignUp"
-import ShareCTA from "../components/ShareCTA"
+import ShareCTA from "../../../components/voting/components/voting/ShareCTA"
 
 export default function TruckStopDesigner() {
   return (
     <div className="min-h-screen bg-gray-100">
-      <Header />
+      <header className="bg-blue-600 text-white py-4">
+        <div className="container mx-auto px-4">
+          <h1 className="text-3xl font-bold">Help Us Design the Ultimate Truck Stop!</h1>
+        </div>
+      </header>
       <main className="container mx-auto px-4 py-8">
-        <Introduction />
+        <section className="my-8 text-center">
+          <p className="text-xl">
+            Welcome to our community-driven truck stop design project! Your votes will shape the features and amenities of
+            our new facility. Explore the options below and make your voice heard!
+          </p>
+        </section>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
           <VotingSection
-            title="Truck Parking & Circulation"
+            title="Truck Parking"
             description="Vote on the number of truck parking spaces and their layout."
             options={["100 Parallel Spaces", "150 Angled Spaces", "200 Mixed Layout"]}
             type="slider"  // Make it a slider for more interactive voting

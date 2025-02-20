@@ -2,13 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, MapPin, Clock, CreditCard, Settings, Truck, Building2 } from 'lucide-react'
+import { LayoutDashboard, MapPin, Clock, CreditCard, Settings, Truck, Building2, BarChart } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -18,27 +17,27 @@ import {
 const driverNavItems = [
   {
     title: "Dashboard",
-    href: "/dashboard",
+    href: "/parking-booking/dashboard",
     icon: LayoutDashboard,
   },
   {
     title: "Find Parking",
-    href: "/dashboard/find-parking",
+    href: "/parking-booking/dashboard/find-parking",
     icon: MapPin,
   },
   {
     title: "My Bookings",
-    href: "/dashboard/bookings",
+    href: "/parking-booking/dashboard/bookings",
     icon: Clock,
   },
   {
     title: "Payments",
-    href: "/dashboard/payments",
+    href: "/parking-booking/dashboard/payments",
     icon: CreditCard,
   },
   {
     title: "Settings",
-    href: "/dashboard/settings",
+    href: "/parking-booking/dashboard/settings",
     icon: Settings,
   },
 ]
@@ -46,43 +45,48 @@ const driverNavItems = [
 const operatorNavItems = [
   {
     title: "Dashboard",
-    href: "/dashboard",
+    href: "/parking-booking/dashboard",
     icon: LayoutDashboard,
   },
   {
     title: "Parking Lots",
-    href: "/dashboard/parking-lots",
+    href: "/parking-booking/dashboard/parking-lots",
     icon: Building2,
   },
   {
     title: "Bookings",
-    href: "/dashboard/bookings",
+    href: "/parking-booking/dashboard/bookings",
     icon: Truck,
   },
   {
     title: "Payments",
-    href: "/dashboard/payments",
+    href: "/parking-booking/dashboard/payments",
     icon: CreditCard,
   },
   {
+    title: "Analytics",
+    href: "/parking-booking/dashboard/analytics",
+    icon: BarChart,
+  },
+  {
     title: "Settings",
-    href: "/dashboard/settings",
+    href: "/parking-booking/dashboard/settings",
     icon: Settings,
   },
 ]
 
 interface SidebarNavProps {
-  userRole?: 'driver' | 'operator'
+  userRole?: "driver" | "operator"
 }
 
-export function SidebarNav({ userRole = 'driver' }: SidebarNavProps) {
+export function SidebarNav({ userRole = "driver" }: SidebarNavProps) {
   const pathname = usePathname()
-  const navItems = userRole === 'driver' ? driverNavItems : operatorNavItems
+  const navItems = userRole === "driver" ? driverNavItems : operatorNavItems
 
   return (
     <Sidebar>
       <SidebarHeader className="border-b px-6 py-4">
-        <h2 className="text-lg font-semibold">{userRole === 'driver' ? 'Driver Portal' : 'Operator Portal'}</h2>
+        <h2 className="text-lg font-semibold">{userRole === "driver" ? "Driver Portal" : "Operator Portal"}</h2>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -90,10 +94,7 @@ export function SidebarNav({ userRole = 'driver' }: SidebarNavProps) {
             <SidebarMenu>
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.href}
-                  >
+                  <SidebarMenuButton asChild isActive={pathname === item.href}>
                     <Link href={item.href}>
                       <item.icon className="mr-2 h-4 w-4" />
                       {item.title}

@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import VotingSection from "./VotingSection"
-import CommentSection from "./CommentSection"
-import AuthButton from "./AuthButton"
+import CommentSection from "../CommentSection"
+import AuthButton from "../AuthButton"
 import UserVoteHistory from "./UserVoteHistory"
 import type { Session } from "next-auth"
 

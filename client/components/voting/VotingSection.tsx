@@ -1,13 +1,15 @@
+/* client/components/voting/VotingSection.tsx */
 "use client"
 
 import Image from "next/image"
 import { useState, useEffect } from "react"
 import type { Session } from "next-auth"
-import { saveVoteLocally, getLocalVote } from "../utils/localStorage"
+import { saveVoteLocally, getLocalVote } from "@/utils/localStorage"
 
 interface VotingSectionProps {
   id: number
   title: string
+  description: string
   options: string[]
   session: Session | null
   icon: string
